@@ -5,7 +5,6 @@ import GlobalStyle from './styles/GlobalStyle';
 import theme from './styles/theme';
 import AppRouter from './Router';
 import Header from './components/layout/Header';
-import Card from './components/MissionCard/Card';
 
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
         <GlobalStyle />
         <ThemeProvider theme={theme}>
           <Header />
-          <Card />
           <AppRouter />
         </ThemeProvider>
       </RecoilRoot>

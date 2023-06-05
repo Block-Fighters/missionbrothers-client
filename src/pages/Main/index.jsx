@@ -1,9 +1,10 @@
 import React from 'react';
+import Card from '../../components/MissionCard/Card';
 
 function MainPage() {
   return (
     <div>
-      <p>Main</p>
+      <Card />
     </div>
   );
 }
