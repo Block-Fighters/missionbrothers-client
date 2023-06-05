@@ -1,11 +1,19 @@
 import React from 'react';
-import { $HeaderWrapperDiv } from './style';
+import { $HeaderWrapperDiv, $LogoDiv, $WalletButton } from './style';
+import LogoMini from '../../assets/logo/LogoMini.png';
+import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 
 function Header() {
   return (
     <$HeaderWrapperDiv>
-      <div>logo부분</div>
-      <div>지갑연동버튼부분</div>
+      <$LogoDiv>
+        <img src={LogoMini} />
+        <span>미션의형제들</span>
+      </$LogoDiv>
+      <$WalletButton>
+        <MdOutlineAccountBalanceWallet />
+        <span>Connect wallet</span>
+      </$WalletButton>
     </$HeaderWrapperDiv>
   );
 }
