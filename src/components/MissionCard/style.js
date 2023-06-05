@@ -36,6 +36,7 @@ export const $Text = styled.div`
 `;
 
 export const $Title = styled.div`
+    //안녕하세요 
     font-size: 24px;
     margin-top: 6px;
     margin-bottom: 17px;
