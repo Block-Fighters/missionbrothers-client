@@ -13,6 +13,7 @@ contract MissionContract {
 
     Token public missionToken;
     uint256 public constant tokenPrice = 0.1 ether; // 1 Ether = 10 tokens
+    uint256 public constant MISSION_REGISTER_FEE = 1 ether;
 
     struct Mission {
         string title;
@@ -36,6 +37,9 @@ contract MissionContract {
     event MissionParticipated(uint256 missionId, address participant);
     event MissionClosed(uint256 missionId, uint256[] rewards);
 
+    constructor(Token _missionToken) {
+        missionToken = _missionToken;
+    }
 
     function registerMission(
         string memory _title,
@@ -44,10 +48,9 @@ contract MissionContract {
         uint256 _registrationEndTime,
         uint256 _missionEndTime,
         string memory _details
-    ) public {
-        require(_registrationStartTime < _registrationEndTime, "Invalid registration time");
-        require(_registrationEndTime < _missionEndTime, "Invalid mission time");
-
+    ) public payable {
+        require(_registrationStartTime < _registrationEndTime && _registrationEndTime < _missionEndTime, "Invalid registration time");
+        require(msg.value == MISSION_REGISTER_FEE, "Not enough");
         missionCount++;
         Mission storage newMission = missions[missionCount];
         newMission.title = _title;
@@ -89,5 +92,23 @@ contract MissionContract {
             mission.participantsCount,
             mission.isClosed
         );
+    }
+
+    function participateInMission(uint256 _missionId) public {
+        Mission storage mission = missions[_missionId];
+        require(!mission.isClosed, "Mission is closed");
+        require(mission.registrationStartTime <= block.timestamp && block.timestamp <= mission.registrationEndTime, "Invalid registration time");
+
+        // 토큰 전송 및 기타 처리
+        require(missionToken.transferFrom(msg.sender, address(this), mission.participationAmount), "Token transfer failed");
+
+        mission.participantAddresses.push(msg.sender);
+        mission.participantsCount++;
+        mission.totalTokens += mission.participationAmount;
+
+        // 미션 종료 조건 확인 및 처리
+        if (block.timestamp >= mission.missionEndTime) {
+            mission.isClosed = true;
+        }
     }
 }
