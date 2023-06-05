@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme, { flexCustom } from '../../styles/theme';
+import theme, { flexCustom } from '../../../styles/theme';
 
 export const $HeaderWrapperDiv = styled.div`
   width: 100vw;
