@@ -1,9 +1,9 @@
 import React from 'react';
 import { $HeaderWrapperDiv, $LogoDiv, $WalletButton } from './style';
-import LogoMini from '../../assets/logo/LogoMini.png';
+import LogoMini from '../../../assets/logo/LogoMini.png';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 
-function Header() {
+const Header = () => {
   return (
     <$HeaderWrapperDiv>
       <$LogoDiv>
@@ -16,6 +16,6 @@ function Header() {
       </$WalletButton>
     </$HeaderWrapperDiv>
   );
-}
+};
 
 export default Header;
