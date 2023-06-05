@@ -7,3 +7,4 @@ export const $HeaderWrapperDiv = styled.div`
   padding: 0 15vw;
   ${flexCustom('row', 'space-between', 'center')}
 `;
+
