@@ -3,42 +3,29 @@ import theme, { flexCustom } from '../../styles/theme';
 
 export const $CardDiv = styled.div`
   width: 20vw;
-  height: 360px;
-  border-radius: 30px;
-  border: 2px solid ${theme.gray[500]};
-//   ${flexCustom('column', 'space-between', 'center')}
-
+  height: 330px;
+  border-radius: 20px;
+  border: 1px solid ${theme.gray[500]};
+  ${flexCustom('column', 'flex_start', 'flex_start')}
 `;
 
-
- export const $Image = styled.img`
-  width: 93%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 30px 30px 0 0 ;
-  margin-top : 0%
-  margin-right: 0%;
-  margin-left: 0%;
+export const $Image = styled.img`
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+  margin-bottom: 20px;
 `;
-
-export const $CardContent = styled.div`
-${flexCustom('column', 'space-between', 'start')}
-text-align: left;
-
-`;
-
 
 export const $Text = styled.div`
-    font-size : 12px;
-    margin-top: 6px;
-    margin-left : 10px;
-    color:${theme.gray[500]};
+  font-size: 14px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+  color: ${theme.gray[500]};
 `;
 
 export const $Title = styled.div`
-    //안녕하세요 
-    font-size: 24px;
-    margin-top: 6px;
-    margin-bottom: 17px;
-    margin-left : 10px;
+  font-size: 20px;
+  margin-bottom: 19px;
+  margin-left: 20px;
 `;
