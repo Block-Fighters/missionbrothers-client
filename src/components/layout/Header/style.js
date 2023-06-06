@@ -10,28 +10,28 @@ export const $HeaderWrapperDiv = styled.div`
 
 export const $LogoDiv = styled.div`
   ${flexCustom('row', 'center', 'center')}
-  font-size: 40px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 500;
 
   img {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 6px;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 3px;
   }
 `;
 
 export const $WalletButton = styled.button`
   cursor: pointer;
-  width: 15vw;
+  width: 12vw;
   height: 40px;
-  border: 3px solid ${theme.gray[900]};
+  border: 1px solid ${theme.gray[900]};
   border-radius: 10px;
-  font-weight: bold;
-  font-size: 30px;
+  font-weight: 300;
+  font-size: 16px;
   padding: 0 15px;
   color: ${theme.gray[900]};
   span {
-    font-size: 16px;
+    font-size: 14px;
   }
   ${flexCustom('row', 'space-between', 'center')}
 
