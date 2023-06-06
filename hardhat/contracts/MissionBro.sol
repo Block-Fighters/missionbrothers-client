@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "./Token.sol";
 /*********************************************************
 * 1. registerMission: 미션을 등록하는 함수 => 미션 이름, 등록하는 사람, 1인당 참가 금액, 등록 시작 시간, 등록 마감 시간, 미션 마감 시간, 미션 내용을 입력
@@ -11,14 +12,14 @@ import "./Token.sol";
 
 contract MissionContract {
 
-    Token public missionToken;
-    uint256 public constant tokenPrice = 0.1 ether; // 1 Ether = 10 tokens
-    uint256 public constant MISSION_REGISTER_FEE = 1 ether;
+    using SafeMath for uint256;
+    Token public missionToken; // 미션토큰 인스턴스로 호출
+    uint256 public constant MISSION_REGISTER_FEE = 1 ether; // 미션등록 비용
 
     struct Mission {
         string title;
-        address creator;
-        uint256 participationAmount;
+        address creator; // 미션 오픈하는 어드레스
+        uint256 participationAmount;  // 참가비용 설정
         uint256 registrationStartTime;
         uint256 registrationEndTime; // 등록마감과 동시에 미션 시작
         uint256 missionEndTime;
@@ -33,14 +34,16 @@ contract MissionContract {
     mapping(uint256 => Mission) public missions;
     uint256 public missionCount;
 
+    // event -> emit 짝궁
     event MissionRegistered(uint256 missionId);
     event MissionParticipated(uint256 missionId, address participant);
     event MissionClosed(uint256 missionId, uint256[] rewards);
 
+    // Mission 토큰
     constructor(Token _missionToken) {
         missionToken = _missionToken;
     }
-
+    // 미션 등록 함수(1이더 필요함)
     function registerMission(
         string memory _title,
         uint256 _participationAmount,
@@ -49,7 +52,9 @@ contract MissionContract {
         uint256 _missionEndTime,
         string memory _details
     ) public payable {
+        // 시간맞지 않으면 등록 안댐
         require(_registrationStartTime < _registrationEndTime && _registrationEndTime < _missionEndTime, "Invalid registration time");
+        // 1이더 안되면 돈이 충분하지 않아 등록 안댐
         require(msg.value == MISSION_REGISTER_FEE, "Not enough");
         missionCount++;
         Mission storage newMission = missions[missionCount];
@@ -64,7 +69,7 @@ contract MissionContract {
 
         emit MissionRegistered(missionCount);
     }
-
+    // 미션 정보 보여주는 함수(참가자가 참여하면 참가자수, 토탈 금액(토큰) 보임)
     function getMissionDetails(uint256 _missionId) public view returns (
         string memory title,
         address creator,
@@ -79,7 +84,6 @@ contract MissionContract {
     ) {
         Mission storage mission = missions[_missionId];
         require(mission.creator != address(0), "Mission does not exist");
-
         return (
             mission.title,
             mission.creator,
@@ -93,22 +97,26 @@ contract MissionContract {
             mission.isClosed
         );
     }
-
+    // 참가자가 미션에 참여하는 함수(미션 등록할 때 설정한 금액만큼 토큰이 사용된다)
     function participateInMission(uint256 _missionId) public {
         Mission storage mission = missions[_missionId];
-        require(!mission.isClosed, "Mission is closed");
-        require(mission.registrationStartTime <= block.timestamp && block.timestamp <= mission.registrationEndTime, "Invalid registration time");
+        require(mission.creator != address(0), "Mission does not exist");
+        require(mission.isClosed == false, "Mission is closed");
+        // 토큰을 전송받은 사용자의 주소
+        address participant = msg.sender;
+        // 참여에 필요한 토큰 수량 계산
+        uint256 requiredTokens = mission.participationAmount;
+        // 사용자의 토큰 잔액 확인
+        uint256 userTokenBalance = missionToken.balanceOf(participant);
+        require(userTokenBalance >= requiredTokens, "Insufficient token balance");
+        // 토큰을 미션 컨트랙트로 전송
+        missionToken.transferFrom(participant, address(this), requiredTokens);
+        // 미션 정보 업데이트
+        mission.totalTokens = mission.totalTokens.add(requiredTokens);
+        mission.participantsCount = mission.participantsCount.add(1);
+        mission.participantAddresses.push(participant);
+        mission.participantTokens[participant] = requiredTokens;
 
-        // 토큰 전송 및 기타 처리
-        require(missionToken.transferFrom(msg.sender, address(this), mission.participationAmount), "Token transfer failed");
-
-        mission.participantAddresses.push(msg.sender);
-        mission.participantsCount++;
-        mission.totalTokens += mission.participationAmount;
-
-        // 미션 종료 조건 확인 및 처리
-        if (block.timestamp >= mission.missionEndTime) {
-            mission.isClosed = true;
-        }
+        emit MissionParticipated(_missionId, participant);
     }
 }
