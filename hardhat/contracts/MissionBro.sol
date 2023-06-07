@@ -102,20 +102,31 @@ contract MissionContract {
         Mission storage mission = missions[_missionId];
         require(mission.creator != address(0), "Mission does not exist");
         require(mission.isClosed == false, "Mission is closed");
+
         // 토큰을 전송받은 사용자의 주소
         address participant = msg.sender;
+
         // 참여에 필요한 토큰 수량 계산
         uint256 requiredTokens = mission.participationAmount;
+
         // 사용자의 토큰 잔액 확인
         uint256 userTokenBalance = missionToken.balanceOf(participant);
         require(userTokenBalance >= requiredTokens, "Insufficient token balance");
-        // 토큰을 미션 컨트랙트로 전송
+
+        // 5%의 수수료 계산
+        uint256 feeTokens = requiredTokens.mul(5).div(100);
+        // 참가자에게 지급할 토큰 계산
+        uint256 participantTokens = requiredTokens.sub(feeTokens);
+
+        // 토큰 전송
         missionToken.transferFrom(participant, address(this), requiredTokens);
+        missionToken.transfer(mission.creator, feeTokens);
+
         // 미션 정보 업데이트
-        mission.totalTokens = mission.totalTokens.add(requiredTokens);
+        mission.totalTokens = mission.totalTokens.add(participantTokens);
         mission.participantsCount = mission.participantsCount.add(1);
         mission.participantAddresses.push(participant);
-        mission.participantTokens[participant] = requiredTokens;
+        mission.participantTokens[participant] = participantTokens;
 
         emit MissionParticipated(_missionId, participant);
     }
