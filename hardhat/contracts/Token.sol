@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Token is ERC20, Ownable, ReentrancyGuard{
-  using SafeMath for uint256;
+    using SafeMath for uint256;
     address private ownerAddress;
     mapping(address => bool) controllers;
     uint256 public constant NORMAL_PRICE = 1 ether;
@@ -42,9 +42,14 @@ contract Token is ERC20, Ownable, ReentrancyGuard{
         uint256 price = NORMAL_PRICE;
         return (ethAmount * 100 * (10 ** 18)).div(price);
     }
-    function transferEthToMissionContract(address missionContract) external payable {
-        require(missionContract != address(0), "Invalid mission contract address");
-        (bool success, ) = missionContract.call{value: msg.value}("");
-        require(success, "Failed to transfer ETH to mission contract");
+    // 토큰을 이더로 바꿔서 지갑으로 다시 넣는 함수
+    function transferToContractAndClaimEther(uint256 amount) external {
+        require(amount >= 100 * (10**18), "You need to transfer at least 100 tokens");
+        super.transfer(address(this), amount);
+        uint256 etherToTransfer = address(this).balance.mul(amount / (10 ** 2)).div(10 * (10 ** 18));
+        require(etherToTransfer > 0, "No ether available to claim");
+        
+        (bool success, ) = msg.sender.call{value: etherToTransfer}("");
+        require(success, "Transfer failed.");
     }
 }
