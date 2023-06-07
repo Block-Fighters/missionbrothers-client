@@ -2,6 +2,26 @@
 const { ethers } = require("hardhat");
 const fs = require("fs");
 
+function saveAbiFileToAbiFolder(name, contract){
+  // eslint-disable-next-line n/no-path-concat
+  const contractsDir = `${__dirname}/../../src/abi`;
+
+  if (!fs.existsSync(contractsDir)){
+    fs.mkdirSync(contractsDir)
+  }
+  const data = {
+    address: contract.address,
+    abi: JSON.parse(contract.interface.format("json")),
+  };
+
+  fs.writeFileSync(
+    // eslint-disable-next-line n/no-path-concat
+    `${__dirname}/../../src/abi/${name}.json`,
+    JSON.stringify(data),
+  )
+
+}
+
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log(`Deploying contracts with the acount : ${deployer.address}`);
@@ -14,29 +34,13 @@ async function main() {
   console.log(`Token address : ${token.address}`);
 
   const MissionBro = await ethers.getContractFactory("MissionContract");
-  const missionBro = await MissionBro.deploy();
+  const missionBro = await MissionBro.deploy(
+    token.address,
+  );
   console.log(`MissionBro address : ${missionBro.address}`);
 
-  const data = {
-    address : token.address,
-    abi : JSON.parse(token.interface.format("json")),
-  };
-
-  const missionData = {
-    address : missionBro.address,
-    abi : JSON.parse(missionBro.interface.format("json")),
-  }
-
-  fs.writeFileSync(
-    // eslint-disable-next-line n/no-path-concat
-    `${__dirname}/../../src/abi/Token.json`,
-    JSON.stringify(data)
-  );
-  fs.writeFileSync(
-    // eslint-disable-next-line n/no-path-concat
-    `${__dirname}/../../src/abi/MissionBro.json`,
-    JSON.stringify(missionData)
-  )
+  saveAbiFileToAbiFolder("token", token);
+  saveAbiFileToAbiFolder("missionBro", missionBro);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
