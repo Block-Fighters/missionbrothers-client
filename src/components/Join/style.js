@@ -31,10 +31,12 @@ export const $InnerFirstDiv = styled.div`
 `;
 export const $InnerSecondDiv = styled.div`
     width : 100%;
+    height : 52px;
     ${flexCustom('row', 'flex-start', '')}
     font-size : 32px;
     font-weight : 'Bold';
-    padding-bottom : 20px
+    padding-bottom : 20px;
+    margin-bottom : 15px;
     border-bottom : 1px solid ${theme.gray[500]};
 `;
 export const $InnerThirdDiv = styled.div`
