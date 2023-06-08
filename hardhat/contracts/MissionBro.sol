@@ -11,6 +11,7 @@ import "./Token.sol";
  * 4. distributeRewards: 미션이 마감되자 마자 보상을 참가자에게 분배하는 함수 => 미션 ID를 입력받고, 참가자에게는 참여한 토큰 수량에 기반하여 분배(1,2,3등 또는 공동분배).
  * 5. distributeRewardsTopThree : 1,2,3등으로 보상할 수 있는 함수
  * 6. distributeRewardsFair : 모든 참여자가 공평하게 분배
+ * 7. hasParticipated : 참가자가 이미 미션에 참여했는지 확인
  **************************************************************************************************************************************************/
 
 contract MissionContract is Ownable, ReentrancyGuard {
@@ -38,6 +39,7 @@ contract MissionContract is Ownable, ReentrancyGuard {
     }
 
     mapping(uint256 => Mission) public missions;
+    mapping(uint256 => mapping(address => bool)) public hasParticipated; // 중복참여 방지
     uint256 public missionCount;
 
     // event -> emit 짝궁
@@ -110,6 +112,7 @@ contract MissionContract is Ownable, ReentrancyGuard {
         Mission storage mission = missions[_missionId];
         require(mission.creator != address(0), "Mission does not exist");
         require(mission.isClosed == false, "Mission is closed");
+        require(hasParticipated[_missionId][msg.sender] == false, "Already participated");
 
         // 토큰을 전송받은 사용자의 주소
         address participant = msg.sender;
@@ -135,12 +138,13 @@ contract MissionContract is Ownable, ReentrancyGuard {
         mission.participantsCount = mission.participantsCount.add(1);
         mission.participantAddresses.push(participant);
         mission.participantTokens[participant] = participantTokens;
+        hasParticipated[_missionId][participant] = true;
 
         emit MissionParticipated(_missionId, participant);
     }
 
     // 보상분배 함수
-    function distributeRewards(uint256 _missionId) public {
+    function distributeRewards(uint256 _missionId) public onlyOwner {
         Mission storage mission = missions[_missionId];
         require(mission.creator != address(0), "Mission does not exist");
         require(mission.isClosed == false, "Mission is closed");
