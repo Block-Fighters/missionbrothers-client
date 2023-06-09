@@ -1,8 +1,15 @@
 import React from 'react';
-import { $Sticky, $InnerDiv, $InnerFirstDiv, $InnerSecondDiv,$InnerThirdDiv  } from './style';
+import {
+  $Sticky,
+  $InnerDiv,
+  $InnerFirstDiv,
+  $InnerSecondDiv,
+  $InnerThirdDiv,
+} from './style';
 import JoinButton from '../Button/JoinButton';
-import ShareImg from '../../assets/icon/Share.png'
-import UserImg from '../../assets/icon/User.png'
+import { IoPerson } from 'react-icons/io5';
+import { IoMdShare } from 'react-icons/io';
+import { IconContext } from 'react-icons';
 
 const JoinSticky = () => {
   return (
@@ -11,10 +18,14 @@ const JoinSticky = () => {
         <$InnerDiv>
           <$InnerFirstDiv>
             <span>
-                <img src={UserImg}></img>
-                <span style={{paddingLeft : '3px'}}>김요원</span>
+              <IconContext.Provider value={{ size: '0.9em' }}>
+                <IoPerson />
+              </IconContext.Provider>
+              <span style={{ paddingLeft: '3px' }}>김요원</span>
             </span>
-            <span><img src={ShareImg} style={{width: '30px', height : '30px'}}></img></span>
+            <IconContext.Provider value={{ size: '2em' }}>
+              <IoMdShare />
+            </IconContext.Provider>
           </$InnerFirstDiv>
           <$InnerSecondDiv>1,000브로</$InnerSecondDiv>
           <JoinButton />

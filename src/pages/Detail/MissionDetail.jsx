@@ -14,7 +14,6 @@ import {
 } from '../Detail/style';
 import JoinSticky from '../../components/Join/JoinSticky';
 import img from '../../assets/MissionImg/Running.png';
-// import MissionDetailData from './MissionDetailData';
 
 function MissionDetail() {
  const detailDate =   {
