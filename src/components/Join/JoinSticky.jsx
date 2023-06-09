@@ -18,7 +18,7 @@ const JoinSticky = () => {
           </$InnerFirstDiv>
           <$InnerSecondDiv>1,000브로</$InnerSecondDiv>
           <JoinButton />
-          <$InnerThirdDiv>00명 모집 중!</$InnerThirdDiv>
+          <$InnerThirdDiv>00명 도전 중!</$InnerThirdDiv>
         </$InnerDiv>
       </$Sticky>
     </div>
