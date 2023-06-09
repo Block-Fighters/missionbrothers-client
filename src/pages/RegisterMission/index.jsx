@@ -173,10 +173,11 @@ const RegisterMissionPage = () => {
           <Editor
             ref={editorRef}
             initialValue=" "
-            previewStyle="vertical"
+            previewStyle="tab"
             height="600px"
-            initialEditType="wysiwyg"
+            initialEditType="markdown"
             useCommandShortcut={true}
+            autofocus={false}
           />
         </$RegisterBottomLeftDiv>
         <$RegisterBottomRightDiv>
