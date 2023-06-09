@@ -3,7 +3,7 @@ import theme, { flexCustom } from '../../styles/theme';
 
 export const $MainWrapper = styled.div`
   width: 100%;
-  padding: 0 15%;
+  padding: 0 15vw;
 `;
 
 export const $NavDiv = styled.div`

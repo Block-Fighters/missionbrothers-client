@@ -6,6 +6,7 @@ export const $HeaderWrapperDiv = styled.div`
   height: 80px;
   padding: 0 15vw;
   ${flexCustom('row', 'space-between', 'center')}
+  border-bottom: 2px solid rgba(153,153,153,0.3);
 `;
 
 export const $LogoDiv = styled.div`
