@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { $ImageLoaderDiv } from './style';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useCheckFile } from '../../hooks/useCheckFile';
+import { awsS3Upload } from '../../utils/Aws';
 
 const ImageLoader = (props) => {
   const fileRef = useRef(null);
@@ -15,8 +16,11 @@ const ImageLoader = (props) => {
       return;
     }
     try {
-      // 이미지 AWS에 추가하는 작업 필요
-      props.setImage(file);
+      const imgUpload = { folder: 'Img', file };
+
+      const data = await awsS3Upload(imgUpload);
+
+      props.setImage(data.rtnRlt.Location);
     } catch (error) {
       alert(error.message);
     }
