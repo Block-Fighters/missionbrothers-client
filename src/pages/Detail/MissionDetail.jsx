@@ -1,4 +1,5 @@
 import React from 'react';
+import MissionPlay from '../../components/MissionPlay/MissionPlay';
 import {
   $Small,
   $Title,
@@ -56,6 +57,7 @@ function MissionDetail() {
                   <$TableText2>{detailDate.missionPeriod}</$TableText2>
                 </$Table2>
               </div>
+
               <$Line
                 style={{ paddingTop: '50px', width: '655px', color: '#BABABA' }}
               ></$Line>
@@ -64,6 +66,9 @@ function MissionDetail() {
                   dangerouslySetInnerHTML: { __html: detailDate.rule },
                 })}
               </div>
+
+              <MissionPlay/>
+
             </div>
           </$LeftDiv>
           <JoinSticky />
