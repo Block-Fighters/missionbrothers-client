@@ -1,4 +1,5 @@
 import React from 'react';
+import MissionPlay from '../../components/MissionPlay/MissionPlay';
 import {
   $Small,
   $Title,
@@ -57,6 +58,7 @@ function MissionDetail() {
                 </$Table2>
               </div>
               <$Line style={ {paddingTop : '50px',width:'655px', color :'#BABABA'}}></$Line>
+              <MissionPlay/>
             </div>
           </$LeftDiv>
           <JoinSticky/>
