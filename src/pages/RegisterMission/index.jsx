@@ -73,7 +73,7 @@ const RegisterMissionPage = () => {
       type,
       title,
       image,
-      recruitmentPeriod: makeTimeStamp(recruitmentPeriod),
+      recruitmentPeriod: makeTimeStamp(getToday()),
       missionStartDate: makeTimeStamp(missionStartDate),
       missionEndDate: makeTimeStamp(missionEndDate),
       fee,
@@ -135,6 +135,7 @@ const RegisterMissionPage = () => {
                 onChange={onChangeStartMissionDate}
                 type="date"
                 min={recruitmentPeriod}
+                max={recruitmentPeriod}
               />
               <$TextMargin>~</$TextMargin>
               <$RegisterMissionInput
