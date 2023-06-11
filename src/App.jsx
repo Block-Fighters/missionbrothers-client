@@ -5,7 +5,10 @@ import GlobalStyle from './styles/GlobalStyle';
 import theme from './styles/theme';
 import AppRouter from './Router';
 
+
+
 function App() {
+
   return (
     <>
       <RecoilRoot>
