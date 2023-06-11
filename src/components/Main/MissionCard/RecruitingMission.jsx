@@ -1,10 +1,12 @@
 
 import React, { useEffect , useState } from 'react';
 import { $CardListDiv ,$CardDiv, $Image, $Text, $Title } from './style';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function RecruitingMission() {
   const [missionList, setMissionList] = useState([]);
+  const navigate = useNavigate();
   // const [fetching, setFetching] = useState(false);
   // const [data, setData] = useState([]);
   // const [page, setPage] = useState(0);
@@ -52,8 +54,7 @@ function RecruitingMission() {
   const fetchMissions = async() => {
     const response = await axios.post('http://localhost:8000/api/mission/list');
     setMissionList(response.data.postData)
-   
-
+    
   };
   useEffect(() => {
     fetchMissions();
@@ -63,12 +64,12 @@ function RecruitingMission() {
     <$CardListDiv>
 
       {missionList.map((post) => (
-        <$CardDiv key={post.index} index={post.index + 1} id={post.index}>
-          <$Image src={post.img} />
-          <$Text>{post.category} 미션</$Text>
-          <$Title>{post.missionTitle}</$Title>
-          <$Text>모집기간 - {post.recruitmentEnd}</$Text>
-          <$Text>미션기간 - {post.missionStart}~{post.missionEnd}</$Text>
+        <$CardDiv key={post?.index} index={post?.index + 1} id={post?.index} onClick={()=>{navigate(`/missionDetail/${post.id}`);}}>
+          <$Image src={post?.img} />
+          <$Text>{post?.category} 미션</$Text>
+          <$Title>{post?.missionTitle}</$Title>
+          <$Text>모집기간 - {post?.recruitmentEnd}</$Text>
+          <$Text>미션기간 - {post?.missionStart}~{post?.missionEnd}</$Text>
           <$Text>미션 참가비 - 브로</$Text>
         </$CardDiv>
       ))}
