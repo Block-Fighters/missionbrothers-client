@@ -6,11 +6,13 @@ export const $Small = styled.div`
   color: ${theme.gray[500]};
   margin-bottom: 8px;
   font-weight: bold;
+  margin-top: 80px;
 `;
 
 export const $Title = styled.div`
   font-size: 36px;
   margin-bottom: 50px;
+  margin-top: 30px;
 `;
 
 export const $Image = styled.img`
@@ -48,7 +50,6 @@ export const $LeftDiv = styled.div`
 
 export const $TotalDiv = styled.div`
   ${flexCustom('row', 'center', '')}
-
 `;
 export const $Table1 = styled.div`
   border-top: 1px solid ${theme.gray[500]};
@@ -70,15 +71,15 @@ export const $Table2 = styled.div`
 
 export const $TableText1 = styled.div`
   text-align: center;
-  font-size : 16px;
-  font-weight : 800;
+  font-size: 16px;
+  font-weight: 800;
 `;
 
 export const $TableText2 = styled.div`
   text-align: start;
-  font-size : 16px;
-  font-weight : 500;
-  padding : 10px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px;
 `;
 
 export const $Sticky = styled.div`
@@ -97,5 +98,4 @@ export const $Sticky = styled.div`
   position: sticky;
 `;
 
-export const $Text = styled.div`
-`;
+export const $Text = styled.div``;

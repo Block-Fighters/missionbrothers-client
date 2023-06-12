@@ -16,7 +16,9 @@ import {
   $LeftDiv,
 } from '../Detail/style';
 import JoinSticky from '../../components/Join/JoinSticky';
-import MissionPlay from '../../components/MissionPlay/MissionPlay';
+// import MissionPlay from '../../components/MissionPlay/MissionPlay';
+import dateFormat from '../../hooks/dateFormat';
+
 
 function MissionDetail() {
   const { id } = useParams();
@@ -42,7 +44,7 @@ function MissionDetail() {
     <div>
       <$titleDiv>
         <$Line>
-          <$Small>{mission?.category}</$Small>
+          <$Small>{mission?.category}미션</$Small>
           <$Title>{mission?.missionTitle}</$Title>
         </$Line>
       </$titleDiv>
@@ -56,7 +58,9 @@ function MissionDetail() {
                   <$TableText1>모집기간</$TableText1>
                 </$Table1>
                 <$Table2>
-                  <$TableText2>{mission?.recruitmentEnd}</$TableText2>
+                  <$TableText2>
+                    {dateFormat(mission?.recruitmentEnd)}
+                  </$TableText2>
                 </$Table2>
               </div>
               <div>
@@ -65,7 +69,9 @@ function MissionDetail() {
                 </$Table1>
                 <$Table2 style={{ borderBottom: '1px solid #999999' }}>
                   <$TableText2>
-                    {mission?.missionStart}~{mission?.missionEnd}
+                    {dateFormat(mission?.missionStart)}~
+                    {dateFormat(mission?.missionEnd)}
+
                   </$TableText2>
                 </$Table2>
               </div>
@@ -79,7 +85,8 @@ function MissionDetail() {
                 })}
               </div>
 
-              <MissionPlay />
+              {/* <MissionPlay /> */}
+
             </div>
           </$LeftDiv>
           <JoinSticky />
