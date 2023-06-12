@@ -21,3 +21,7 @@ export const $WalletButton = styled.button`
     color: ${theme.white};
   }
 `;
+
+export const $UserNickName = styled.div`
+  cursor: pointer;
+`;

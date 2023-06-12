@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
-import { $WalletButton } from './style';
+import { $WalletButton, $UserNickName } from './style';
 import { useAccount, useConnect } from 'wagmi';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ConnectWalletButton = () => {
+  const navigate = useNavigate();
   const { address, isConnected } = useAccount();
   const { connect, connectors } = useConnect();
   //   const { disconnect } = useDisconnect();
@@ -53,10 +55,14 @@ const ConnectWalletButton = () => {
     }
   };
 
+  const onClickUser = () => {
+    navigate('/myPage');
+  };
+
   return (
     <>
       {isConnected ? (
-        <div>김재현</div>
+        <$UserNickName onClick={onClickUser}>김요원</$UserNickName>
       ) : (
         <$WalletButton onClick={onClickLogin}>
           <MdOutlineAccountBalanceWallet />

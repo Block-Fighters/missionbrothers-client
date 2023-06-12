@@ -4,6 +4,7 @@ import MainPage from './pages/Main';
 import MissionDetail from './pages/Detail/MissionDetail';
 import RegisterMissionPage from './pages/RegisterMission';
 import Layout from './components/layout/Layout';
+import MyPage from './pages/MyPage';
 
 function AppRouter() {
   return (
@@ -13,6 +14,7 @@ function AppRouter() {
           <Route path={'/'} element={<MainPage />} />
           <Route path={'/missionDetail'} element={<MissionDetail />} />
           <Route path={'/registerMission'} element={<RegisterMissionPage />} />
+          <Route path={'/myPage'} element={<MyPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
