@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  $Sticky,
-  $InnerDiv,
-  $InnerFirstDiv,
-  $InnerSecondDiv,
-  $InnerThirdDiv,
-} from './style';
+import { $Sticky, $InnerDiv, $InnerFirstDiv, $InnerSecondDiv } from './style';
 import JoinButton from '../Button/JoinButton';
 import { IoPerson } from 'react-icons/io5';
 import { IoMdShare } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 
-const JoinSticky = () => {
+const JoinSticky = ({ amount }) => {
   return (
     <div>
       <$Sticky>
@@ -27,9 +21,8 @@ const JoinSticky = () => {
               <IoMdShare />
             </IconContext.Provider>
           </$InnerFirstDiv>
-          <$InnerSecondDiv>1,000브로</$InnerSecondDiv>
+          <$InnerSecondDiv>{amount} BRO</$InnerSecondDiv>
           <JoinButton />
-          <$InnerThirdDiv>00명 도전 중!</$InnerThirdDiv>
         </$InnerDiv>
       </$Sticky>
     </div>
