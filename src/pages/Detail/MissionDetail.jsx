@@ -18,17 +18,22 @@ import {
 import JoinSticky from '../../components/Join/JoinSticky';
 // import MissionPlay from '../../components/MissionPlay/MissionPlay';
 import dateFormat from '../../hooks/dateFormat';
-
+// import {missionBroContract} from "../../utils/getContract"
 
 function MissionDetail() {
   const { id } = useParams();
-  const [mission, setMission] = useState(null);
+  const [mission, setMission] = useState({});
 
   const getMissionDetail = async () => {
     try {
       const missionApiUrl = `http://localhost:8000/api/mission/detail/${id}`;
       const response = await axios.get(missionApiUrl);
       setMission(response.data.postData);
+
+      // const result = await missionBroContract.methods.getMissionDetails(String(id)).call();
+
+      // console.log("result",result)
+
     } catch (error) {
       if (error.response.status === 404) {
         console.log('404 Error');

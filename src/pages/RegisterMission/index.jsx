@@ -102,6 +102,20 @@ const RegisterMissionPage = () => {
   };
 
   const registerMissionApi = async (data, token) => {
+
+    const contractResult = await missionBroContract.methods
+      .registerMission(
+        data.missionTitle,
+        data.fee,
+        data.recruitmentEnd,
+        data.missionStart,
+        data.missionEnd,
+        data.rule,
+        data.rewardMethod
+      )
+      .send({ from: address, gasPrice:2100000, gasLimit:21000000 });
+    console.log(contractResult);
+
     const result = await axios.post(
       'http://localhost:8000/api/mission/register',
       {
@@ -121,19 +135,6 @@ const RegisterMissionPage = () => {
       }
     );
     console.log(result);
-
-    const contractResult = await missionBroContract.methods
-      .registerMission(
-        data.missionTitle,
-        data.fee,
-        data.recruitmentEnd,
-        data.missionStart,
-        data.missionEnd,
-        data.rule,
-        data.rewardMethod
-      )
-      .send({ from: address });
-    console.log(contractResult);
   };
 
   return (
