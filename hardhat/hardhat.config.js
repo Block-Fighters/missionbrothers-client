@@ -7,7 +7,7 @@ const RPC_URL = "https://polygon-mumbai.g.alchemy.com/v2/bjH08EtvW9vZ-qoqB4wkX_R
 const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 module.exports = {
-  solidity: "0.8.18",
+  solidity: "0.8.0",
   networks: {
     mumbai: {
       url: RPC_URL,

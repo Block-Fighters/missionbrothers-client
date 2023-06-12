@@ -25,7 +25,7 @@ const MyPage = () => {
     console.log('address', address);
     const myToken = await tokenContract.methods.balanceOf(address).call();
 
-    setMyTokenState(myToken);
+    setMyTokenState(web3Instance.utils.fromWei(myToken, 'ether'));
   };
 
   const onClickBuyTokenButton = async () => {
@@ -35,7 +35,7 @@ const MyPage = () => {
       .send({ from: address, value: web3Instance.utils.toWei(value, 'ether') });
     const myToken = await tokenContract.methods.balanceOf(address).call();
 
-    setMyTokenState(myToken);
+    setMyTokenState(web3Instance.utils.fromWei(myToken, 'ether'));
   };
 
   return (

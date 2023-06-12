@@ -1,4 +1,4 @@
-import React ,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -16,29 +16,29 @@ import {
   $LeftDiv,
 } from '../Detail/style';
 import JoinSticky from '../../components/Join/JoinSticky';
-
+import MissionPlay from '../../components/MissionPlay/MissionPlay';
 
 function MissionDetail() {
-  const {id} =useParams();
+  const { id } = useParams();
   const [mission, setMission] = useState(null);
-  
-  const getMissionDetail = async() => {
-      try {
-        const missionApiUrl =  `http://localhost:8000/api/mission/detail/${id}`;
-        const response = await axios.get(missionApiUrl);
-        setMission(response.data.postData);
-      } catch (error) {
-        if (error.response.status === 404) {
-          console.log('404 Error');
-        }
+
+  const getMissionDetail = async () => {
+    try {
+      const missionApiUrl = `http://localhost:8000/api/mission/detail/${id}`;
+      const response = await axios.get(missionApiUrl);
+      setMission(response.data.postData);
+    } catch (error) {
+      if (error.response.status === 404) {
+        console.log('404 Error');
       }
-    };
+    }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getMissionDetail();
-  },[]);
+  }, []);
 
-  return(
+  return (
     <div>
       <$titleDiv>
         <$Line>
@@ -49,7 +49,7 @@ function MissionDetail() {
       <div>
         <$TotalDiv>
           <$LeftDiv>
-            <$Image src={mission?.img}/>
+            <$Image src={mission?.img} />
             <div>
               <div>
                 <$Table1>
@@ -64,7 +64,9 @@ function MissionDetail() {
                   <$TableText1>미션기간</$TableText1>
                 </$Table1>
                 <$Table2 style={{ borderBottom: '1px solid #999999' }}>
-                  <$TableText2>{mission?.missionStart}~{mission?.missionEnd}</$TableText2>
+                  <$TableText2>
+                    {mission?.missionStart}~{mission?.missionEnd}
+                  </$TableText2>
                 </$Table2>
               </div>
 
@@ -77,15 +79,14 @@ function MissionDetail() {
                 })}
               </div>
 
-              <MissionPlay/>
-
+              <MissionPlay />
             </div>
           </$LeftDiv>
           <JoinSticky />
         </$TotalDiv>
       </div>
     </div>
-    );
-};
+  );
+}
 
 export default MissionDetail;
