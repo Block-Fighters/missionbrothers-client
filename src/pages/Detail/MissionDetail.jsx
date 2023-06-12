@@ -19,6 +19,7 @@ import JoinSticky from '../../components/Join/JoinSticky';
 // import MissionPlay from '../../components/MissionPlay/MissionPlay';
 import dateFormat from '../../hooks/dateFormat';
 
+
 function MissionDetail() {
   const { id } = useParams();
   const [mission, setMission] = useState(null);
@@ -70,6 +71,7 @@ function MissionDetail() {
                   <$TableText2>
                     {dateFormat(mission?.missionStart)}~
                     {dateFormat(mission?.missionEnd)}
+
                   </$TableText2>
                 </$Table2>
               </div>
@@ -84,6 +86,7 @@ function MissionDetail() {
               </div>
 
               {/* <MissionPlay /> */}
+
             </div>
           </$LeftDiv>
           <JoinSticky />
