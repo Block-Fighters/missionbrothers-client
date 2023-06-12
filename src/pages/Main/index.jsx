@@ -11,6 +11,7 @@ const MainPage = () => {
     setNav(buttonId);
   };
 
+
   return (
     <$MainWrapper>
       <$NavDiv>

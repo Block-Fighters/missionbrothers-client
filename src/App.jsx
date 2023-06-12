@@ -6,7 +6,10 @@ import theme from './styles/theme';
 import AppRouter from './Router';
 import { WagmiProvider } from './components/Provider/WagmiProvider';
 
+
+
 function App() {
+
   return (
     <>
       <WagmiProvider>
