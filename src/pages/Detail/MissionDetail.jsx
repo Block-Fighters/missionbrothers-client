@@ -1,5 +1,7 @@
-import React from 'react';
-import MissionPlay from '../../components/MissionPlay/MissionPlay';
+import React ,{useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 import {
   $Small,
   $Title,
@@ -14,39 +16,47 @@ import {
   $LeftDiv,
 } from '../Detail/style';
 import JoinSticky from '../../components/Join/JoinSticky';
-import img from '../../assets/MissionImg/Running.png';
+
 
 function MissionDetail() {
-  const detailDate = {
-    type: '운동', // 주제
-    title: '마라톤 같이 뛰어요!', // 제목
-    recruitmentPeriod: '2023년 06월 01일까지', // 모집기간
-    missionPeriod: '2023년 06월 02일 ~ 03일', // 미션기간
-    fee: 1000, // 미션참가비
-    registrant: '김재현', // 미션등록자
-    participant: 100, // 미션참가자 수
-    rule: '<p>테스트</p><p><br></p><p><strong>이건 테스트 입니다</strong></p><h6>test test test</h6><p>1234</p><p><br></p><p>하나 둘 셋 넷</p>', // 상세 내용
-  };
+  const {id} =useParams();
+  const [mission, setMission] = useState(null);
+  
+  const getMissionDetail = async() => {
+      try {
+        const missionApiUrl =  `http://localhost:8000/api/mission/detail/${id}`;
+        const response = await axios.get(missionApiUrl);
+        setMission(response.data.postData);
+      } catch (error) {
+        if (error.response.status === 404) {
+          console.log('404 Error');
+        }
+      }
+    };
 
-  return (
+  useEffect(()=>{
+    getMissionDetail();
+  },[]);
+
+  return(
     <div>
       <$titleDiv>
         <$Line>
-          <$Small>{detailDate.type}</$Small>
-          <$Title>{detailDate.title}</$Title>
+          <$Small>{mission?.category}</$Small>
+          <$Title>{mission?.missionTitle}</$Title>
         </$Line>
       </$titleDiv>
       <div>
         <$TotalDiv>
           <$LeftDiv>
-            <$Image src={img} />
+            <$Image src={mission?.img}/>
             <div>
               <div>
                 <$Table1>
                   <$TableText1>모집기간</$TableText1>
                 </$Table1>
                 <$Table2>
-                  <$TableText2>{detailDate.recruitmentPeriod}</$TableText2>
+                  <$TableText2>{mission?.recruitmentEnd}</$TableText2>
                 </$Table2>
               </div>
               <div>
@@ -54,7 +64,7 @@ function MissionDetail() {
                   <$TableText1>미션기간</$TableText1>
                 </$Table1>
                 <$Table2 style={{ borderBottom: '1px solid #999999' }}>
-                  <$TableText2>{detailDate.missionPeriod}</$TableText2>
+                  <$TableText2>{mission?.missionStart}~{mission?.missionEnd}</$TableText2>
                 </$Table2>
               </div>
 
@@ -63,7 +73,7 @@ function MissionDetail() {
               ></$Line>
               <div style={{ marginTop: '50px' }}>
                 {React.createElement('div', {
-                  dangerouslySetInnerHTML: { __html: detailDate.rule },
+                  dangerouslySetInnerHTML: { __html: mission?.rule },
                 })}
               </div>
 
@@ -75,7 +85,7 @@ function MissionDetail() {
         </$TotalDiv>
       </div>
     </div>
-  );
-}
+    );
+};
 
 export default MissionDetail;
