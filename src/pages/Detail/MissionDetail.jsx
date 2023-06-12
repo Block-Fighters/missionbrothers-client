@@ -1,62 +1,62 @@
-import React , { useEffect, useParams , useState }  from 'react';
-// import {
-//   $Small,
-//   $Title,
-//   $Image,
-//   $titleDiv,
-//   $Line,
-//   $Table1,
-//   $Table2,
-//   $TableText1,
-//   $TableText2,
-//   $TotalDiv,
-//   $LeftDiv,
-// } from '../Detail/style';
-// import JoinSticky from '../../components/Join/JoinSticky';
+import React ,{useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
+import {
+  $Small,
+  $Title,
+  $Image,
+  $titleDiv,
+  $Line,
+  $Table1,
+  $Table2,
+  $TableText1,
+  $TableText2,
+  $TotalDiv,
+  $LeftDiv,
+} from '../Detail/style';
+import JoinSticky from '../../components/Join/JoinSticky';
 
 
 function MissionDetail() {
-  // eslint-disable-next-line
-  let {post} = useParams()
-  // eslint-disable-next-line
-  const [mission, setMission ] =useState([]);
-
-  // eslint-disable-next-line
-  const getMission = async () => {
-    // eslint-disable-next-line
-    let url = `http://localhost:8000/api/mission/list/${post}`;
-    // eslint-disable-next-line
-    let response = await fetch(url);
-    // eslint-disable-next-line
-    let data = await response.json(); 
-    console.log(data);
-    setMission(data);
-  };
+  const {id} =useParams();
+  const [mission, setMission] = useState(null);
+  
+  const getMissionDetail = async() => {
+      try {
+        const missionApiUrl =  `http://localhost:8000/api/mission/detail/${id}`;
+        const response = await axios.get(missionApiUrl);
+        setMission(response.data.postData);
+      } catch (error) {
+        if (error.response.status === 404) {
+          console.log('404 Error');
+        }
+      }
+    };
 
   useEffect(()=>{
-    getMission();
+    getMissionDetail();
   },[]);
 
-  return (
+  return(
     <div>
-      
-      {/* <$titleDiv>
+      <$titleDiv>
         <$Line>
-          <$Small>{mission? .postData.type}</$Small>
-          <$Title>{mission? .postData.title}</$Title>
+          <$Small>{mission?.category}</$Small>
+          <$Title>{mission?.missionTitle}</$Title>
         </$Line>
       </$titleDiv>
       <div>
         <$TotalDiv>
           <$LeftDiv>
-            <$Image src={mission? .postData.img}/>
+            <$Image src={mission?.img}/>
             <div>
               <div>
                 <$Table1>
                   <$TableText1>모집기간</$TableText1>
                 </$Table1>
                 <$Table2>
-                  <$TableText2>{detailDate.recruitmentPeriod}</$TableText2>
+                  <$TableText2>{mission?.recruitmentEnd}</$TableText2>
                 </$Table2>
               </div>
               <div>
@@ -64,7 +64,7 @@ function MissionDetail() {
                   <$TableText1>미션기간</$TableText1>
                 </$Table1>
                 <$Table2 style={{ borderBottom: '1px solid #999999' }}>
-                  <$TableText2>{detailDate.missionPeriod}</$TableText2>
+                  <$TableText2>{mission?.missionStart}~{mission?.missionEnd}</$TableText2>
                 </$Table2>
               </div>
 
@@ -73,7 +73,7 @@ function MissionDetail() {
               ></$Line>
               <div style={{ marginTop: '50px' }}>
                 {React.createElement('div', {
-                  dangerouslySetInnerHTML: { __html: detailDate.rule },
+                  dangerouslySetInnerHTML: { __html: mission?.rule },
                 })}
               </div>
 
@@ -83,9 +83,9 @@ function MissionDetail() {
           </$LeftDiv>
           <JoinSticky />
         </$TotalDiv>
-      </div> */}
+      </div>
     </div>
-  );
-}
+    );
+};
 
 export default MissionDetail;
