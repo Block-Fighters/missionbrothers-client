@@ -1,10 +1,10 @@
 import { configureChains, createConfig } from 'wagmi';
-import { polygonMumbai, mainnet } from 'wagmi/chains';
+import { sepolia, mainnet } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 
 export const { chains, publicClient, provider } = configureChains(
-  [mainnet, ...(process.env.NODE_ENV === 'development' ? [polygonMumbai] : [])],
+  [mainnet, ...(process.env.NODE_ENV === 'development' ? [sepolia] : [])],
   [publicProvider()]
 );
 
