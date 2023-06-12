@@ -18,11 +18,12 @@ import {
 import JoinSticky from '../../components/Join/JoinSticky';
 // import MissionPlay from '../../components/MissionPlay/MissionPlay';
 import dateFormat from '../../hooks/dateFormat';
-// import {missionBroContract} from "../../utils/getContract"
+import { missionBroContract } from '../../utils/getContract';
 
 function MissionDetail() {
   const { id } = useParams();
   const [mission, setMission] = useState({});
+  const [amount, setAmount] = useState(0);
 
   const getMissionDetail = async () => {
     try {
@@ -30,10 +31,11 @@ function MissionDetail() {
       const response = await axios.get(missionApiUrl);
       setMission(response.data.postData);
 
-      // const result = await missionBroContract.methods.getMissionDetails(String(id)).call();
+      const result = await missionBroContract.methods
+        .getMissionDetails(Number(id))
+        .call();
 
-      // console.log("result",result)
-
+      setAmount(result.participationAmount);
     } catch (error) {
       if (error.response.status === 404) {
         console.log('404 Error');
@@ -76,7 +78,6 @@ function MissionDetail() {
                   <$TableText2>
                     {dateFormat(mission?.missionStart)}~
                     {dateFormat(mission?.missionEnd)}
-
                   </$TableText2>
                 </$Table2>
               </div>
@@ -91,10 +92,9 @@ function MissionDetail() {
               </div>
 
               {/* <MissionPlay /> */}
-
             </div>
           </$LeftDiv>
-          <JoinSticky />
+          <JoinSticky amount={amount} />
         </$TotalDiv>
       </div>
     </div>
