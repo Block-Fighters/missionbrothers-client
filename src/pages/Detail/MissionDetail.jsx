@@ -14,6 +14,7 @@ import React , { useEffect, useParams , useState }  from 'react';
 // } from '../Detail/style';
 // import JoinSticky from '../../components/Join/JoinSticky';
 
+
 function MissionDetail() {
   // eslint-disable-next-line
   let {post} = useParams()
@@ -66,6 +67,7 @@ function MissionDetail() {
                   <$TableText2>{detailDate.missionPeriod}</$TableText2>
                 </$Table2>
               </div>
+
               <$Line
                 style={{ paddingTop: '50px', width: '655px', color: '#BABABA' }}
               ></$Line>
@@ -74,6 +76,9 @@ function MissionDetail() {
                   dangerouslySetInnerHTML: { __html: detailDate.rule },
                 })}
               </div>
+
+              <MissionPlay/>
+
             </div>
           </$LeftDiv>
           <JoinSticky />

@@ -1,19 +1,27 @@
 import React from 'react';
-import { $HeaderWrapperDiv, $LogoDiv, $WalletButton } from './style';
+import { $HeaderWrapperDiv, $LogoDiv } from './style';
 import LogoMini from '../../../assets/logo/LogoMini.png';
-import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import ConnectWalletButton from '../../ConnectWalletButton/ConnectWalletButton';
+import { tokenContract, missionBroContract } from '../../../utils/getContract';
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const onClickLogo = () => {
+    navigate('/');
+  };
+
+  console.log('token', tokenContract);
+  console.log('mission', missionBroContract);
+
   return (
     <$HeaderWrapperDiv>
-      <$LogoDiv>
+      <$LogoDiv onClick={onClickLogo}>
         <img src={LogoMini} />
         <span>미션의형제들</span>
       </$LogoDiv>
-      <$WalletButton>
-        <MdOutlineAccountBalanceWallet />
-        <span>Connect wallet</span>
-      </$WalletButton>
+      <ConnectWalletButton />
     </$HeaderWrapperDiv>
   );
 };
