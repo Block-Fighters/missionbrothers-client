@@ -1,5 +1,5 @@
 {
-  "address": "0x1bBA9ddC2a98D5c62a0472e0D135A77118DC7a87",
+  "address": "0xbc9881C249fca7e30991485Ec88ed799Df804C07",
   "abi": [
     {
       "inputs": [
@@ -17,7 +17,7 @@
     {
       "inputs": [
         {
-          "internalType": "contract Token",
+          "internalType": "contract MissionToken",
           "name": "_missionToken",
           "type": "address"
         }
@@ -370,7 +370,7 @@
       "name": "missionToken",
       "outputs": [
         {
-          "internalType": "contract Token",
+          "internalType": "contract MissionToken",
           "name": "",
           "type": "address"
         }
