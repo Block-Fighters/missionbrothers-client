@@ -86,7 +86,7 @@ const RegisterMissionPage = () => {
       missionTitle: title,
       img: image,
       recruitmentEnd: makeTimeStamp(getToday()),
-      missionStart: makeTimeStamp(missionStartDate),
+      missionStart: makeTimeStamp(missionStartDate) + 1,
       missionEnd: makeTimeStamp(missionEndDate),
       fee: Number(fee),
       rewardMethod,
@@ -102,7 +102,6 @@ const RegisterMissionPage = () => {
   };
 
   const registerMissionApi = async (data, token) => {
-
     const contractResult = await missionBroContract.methods
       .registerMission(
         data.missionTitle,
@@ -113,7 +112,11 @@ const RegisterMissionPage = () => {
         data.rule,
         data.rewardMethod
       )
-      .send({ from: address, gasPrice:2100000, gasLimit:21000000 });
+      .send({
+        from: address,
+        gas: 20000000,
+        value: '10000000000000000',
+      });
     console.log(contractResult);
 
     const result = await axios.post(
