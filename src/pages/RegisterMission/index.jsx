@@ -20,8 +20,12 @@ import ImageLoader from '../../components/ImageLoader/ImageLoader';
 import { Editor } from '@toast-ui/react-editor';
 import { getToday } from '../../hooks/getToday';
 import { makeTimeStamp } from '../../hooks/makeTimeStamp';
+import axios from 'axios';
+import { useAccount } from 'wagmi';
+import { missionBroContract } from '../../utils/getContract';
 
 const RegisterMissionPage = () => {
+  const { address } = useAccount();
   const [type, setType] = useState(null);
   const [title, setTitle] = useState(null);
   const [image, setImage] = useState();
@@ -29,7 +33,14 @@ const RegisterMissionPage = () => {
   const [missionStartDate, setMissionStartDate] = useState(getToday());
   const [missionEndDate, setMissionEndDate] = useState(getToday());
   const [fee, setFee] = useState(0);
-  const [rewardMethod, setRewardMethod] = useState(1);
+  const [rewardMethod, setRewardMethod] = useState(0);
+
+  const getCookie = (name) => {
+    const value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value ? value[2] : null;
+  };
+
+  console.log('쿠키', getCookie('id'));
 
   const onChangeType = (value) => {
     setType(value);
@@ -70,18 +81,59 @@ const RegisterMissionPage = () => {
     }
 
     const registerData = {
-      type,
-      title,
-      image,
-      recruitmentPeriod: makeTimeStamp(getToday()),
-      missionStartDate: makeTimeStamp(missionStartDate),
-      missionEndDate: makeTimeStamp(missionEndDate),
-      fee,
+      metamask: address,
+      category: type,
+      missionTitle: title,
+      img: image,
+      recruitmentEnd: makeTimeStamp(getToday()),
+      missionStart: makeTimeStamp(missionStartDate),
+      missionEnd: makeTimeStamp(missionEndDate),
+      fee: Number(fee),
       rewardMethod,
-      rules,
+      content: rules,
+      rule: rules,
+      registrant: address,
     };
 
-    console.log(registerData);
+    const token = getCookie('id');
+
+    registerMissionApi(registerData, token);
+    console.log(registerData, token);
+  };
+
+  const registerMissionApi = async (data, token) => {
+    const result = await axios.post(
+      'http://localhost:8000/api/mission/register',
+      {
+        metamask: data.metamask,
+        missionTitle: data.missionTitle,
+        rule: data.rule,
+        recruitmentEnd: data.recruitmentEnd,
+        missionStart: data.missionStart,
+        missionEnd: data.missionEnd,
+        content: data.content,
+        category: data.category,
+        registrant: data.registrant,
+        img: data.img,
+      },
+      {
+        headers: { Authorization: 'Bearer ' + token },
+      }
+    );
+    console.log(result);
+
+    const contractResult = await missionBroContract.methods
+      .registerMission(
+        data.missionTitle,
+        data.fee,
+        data.recruitmentEnd,
+        data.missionStart,
+        data.missionEnd,
+        data.rule,
+        data.rewardMethod
+      )
+      .send({ from: address });
+    console.log(contractResult);
   };
 
   return (
@@ -154,16 +206,16 @@ const RegisterMissionPage = () => {
               <span>분배방식</span>
 
               <$MissionTypeSelect
-                defaultValue={1}
+                defaultValue={0}
                 bordered={false}
                 onChange={onChangeRewardMethod}
                 options={[
                   {
-                    value: 1,
+                    value: 0,
                     label: '등수 지급',
                   },
                   {
-                    value: 2,
+                    value: 1,
                     label: '분할 지급',
                   },
                 ]}
