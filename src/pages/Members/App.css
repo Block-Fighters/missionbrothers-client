@@ -1,0 +1,55 @@
+
+
+.flex1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 155px 20% 60px;
+  }
+  .flex2{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    padding: 0 30% 109px;
+  }
+  .title{
+    font-size: 14px;
+    font-weight: bold;
+    color: #999999;
+    margin-top: 192px;
+  }
+  .name{
+    font-size: 24px;
+    color: #000000;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .git{
+    margin-top: 30px;
+    font-weight: bold;
+    color: #999999;
+  }
+  .git > a{
+    font-size: 14px;
+  }
+  .portfolio{
+    margin-top: 5px;
+    font-weight: bold;
+    color: #999999;
+    font-size: 14px;
+  }
+  .word{
+    margin-top: 5px;
+    font-weight: bold;
+    color: #999999;
+    font-size: 14px;
+  }
+  .profile{
+    width: 288px;
+    height: 350px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #999999;
+    border-style: solid;
+    position: relative;
+  }
