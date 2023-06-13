@@ -17,14 +17,14 @@ function RecruitingMission() {
     // try {
     const fetchData = await axios.post(
       'http://localhost:8000/api/mission/list',
-      { start: page, limit: 4 }
+      { start: page, limit: 6 }
     );
     const mergeData = missionList.concat(...fetchData.data.postData);
     setMissionList(mergeData);
     // } catch {
     //   setDone(false);
     // }
-    const nowPage = page + 4;
+    const nowPage = page + 6;
     setPage(nowPage);
     setFetching(false);
   };
@@ -55,10 +55,10 @@ function RecruitingMission() {
   const fetchMissions = async () => {
     const response = await axios.post(
       'http://localhost:8000/api/mission/list',
-      { start: page, limit: 4 }
+      { start: page, limit: 6 }
     );
     setMissionList(response.data.postData);
-    const nowPage = page + 4;
+    const nowPage = page + 6;
     setPage(nowPage);
   };
   useEffect(() => {

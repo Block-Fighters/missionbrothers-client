@@ -50,6 +50,7 @@ export const $LeftDiv = styled.div`
 
 export const $TotalDiv = styled.div`
   ${flexCustom('row', 'center', '')}
+  margin-bottom: 100px;
 `;
 export const $Table1 = styled.div`
   border-top: 1px solid ${theme.gray[500]};
