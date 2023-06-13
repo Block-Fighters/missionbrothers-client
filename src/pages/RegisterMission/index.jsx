@@ -23,6 +23,7 @@ import { makeTimeStamp } from '../../hooks/makeTimeStamp';
 import axios from 'axios';
 import { useAccount } from 'wagmi';
 import { missionBroContract } from '../../utils/getContract';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterMissionPage = () => {
   const { address } = useAccount();
@@ -34,6 +35,7 @@ const RegisterMissionPage = () => {
   const [missionEndDate, setMissionEndDate] = useState(getToday());
   const [fee, setFee] = useState(0);
   const [rewardMethod, setRewardMethod] = useState(0);
+  const navigate = useNavigate();
 
   const getCookie = (name) => {
     const value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
@@ -114,7 +116,7 @@ const RegisterMissionPage = () => {
       )
       .send({
         from: address,
-        gas: 20000000,
+        gas: 2000000,
         value: '10000000000000000',
       });
     console.log(contractResult);
@@ -138,6 +140,7 @@ const RegisterMissionPage = () => {
       }
     );
     console.log(result);
+    navigate('/');
   };
 
   return (
