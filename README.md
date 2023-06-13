@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# Mission Brothers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 팀원
+| 역할 | 이름 | GitHub | 역할 | 이름 | GitHub | 
+--------|------------|------------|------------|------------|------------
+Front-end | 김재현 | <a href="https://github.com/Jaenk-99"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> | Front-end | 장은성 | <a href="https://github.com/sungeee"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>
+| Front-end | 박무호 | <a href="https://github.com/parkmuho"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> | Back-end | 박준혁 | <a href="https://github.com/berrypjh"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> 
+| Contract | 곽경록 | <a href="https://github.com/rok92"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> 
+---------------------------------------
 
-## Available Scripts
+### 프로젝트 기간 : 2023-05-30 ~ 2023-06-13 (총 14일)
 
-In the project directory, you can run:
+### 배경 및 취지
+기존 웹2.0 이벤트 보상에 있어 투명성논란 문제를 웹3.0의 투명성, 불변성을 통해 해결하고자 함
 
-### `npm start`
+이벤트 참여자에게 보상 과정을 투명하고, 신뢰성있게 제공하여 보상. 또한 보상 금액을 최대한 이벤트 참여자가 가져갈 수 있도록 공평한 배분함
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 추진 내용
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**단체 미션** : 미션 참여자는 참가비 지급. 참가비의 수수료( 가스비 + 5% 수수료 ) 를 제외하고 미션 1,2,3 등까지만 스마트컨트랙트를 이용하여 공정하게 보상 지급
 
-### `npm test`
+### 사업화 전략
+참가비 5% 수수료 + 기업과의 미션 콜라보로 기업 서비스를 미션 참여자가 이용하도록 하여 기업 광고 수익
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### 프로젝트 자료  <a href="https://quark-tangelo-d51.notion.site/92ac62232fa64aee850f4b72893e00e3"><img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/></a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 기술 스택
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="https://github.com/Tired-but-Happy/NICO_Front_End/assets/89543695/075c6b9e-38a2-4cee-beeb-946d27840d11" width="550px" height="350px" />
