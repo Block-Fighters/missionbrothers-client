@@ -23,10 +23,6 @@ contract Token is ERC20, Ownable, ReentrancyGuard {
     _mint(to, amount);
   }
 
-  function addController(address controller) external onlyOwner {
-    controllers[controller] = true;
-  }
-
   function setMissionBroContract(
     address _missionBroContract
   ) external onlyOwner {
@@ -40,12 +36,6 @@ contract Token is ERC20, Ownable, ReentrancyGuard {
     _mint(msg.sender, tokenAmount);
   }
 
-  function getTokenAmount(uint256 ethAmount) public pure returns (uint256) {
-    uint256 price = NORMAL_PRICE;
-    return (ethAmount * 10000 * (10 ** 18)).div(price);
-  }
-
-  // 토큰을 이더로 바꿔서 지갑으로 다시 넣는 함수
   function transferToContractAndClaimEther(uint256 amount) external {
     require(
       amount >= 100 * (10 ** 18),
@@ -59,5 +49,14 @@ contract Token is ERC20, Ownable, ReentrancyGuard {
 
     (bool success, ) = msg.sender.call{value: etherToTransfer}('');
     require(success, 'Transfer failed.');
+  }
+
+  function getTokenAmount(uint256 ethAmount) public pure returns (uint256) {
+    uint256 price = NORMAL_PRICE;
+    return (ethAmount * 10000 * (10 ** 18)).div(price);
+  }
+
+  function withdraw() external onlyOwner nonReentrant {
+    payable(owner()).transfer(address(this).balance);
   }
 }
