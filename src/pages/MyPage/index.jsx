@@ -10,6 +10,8 @@ import { useAccount } from 'wagmi';
 
 import { web3Instance, tokenContract } from '../../utils/getContract';
 
+import MissionBro from '../../abi/MissionBro.json';
+
 const MyPage = () => {
   const { address } = useAccount();
   const [myTokenState, setMyTokenState] = useState(0);
@@ -36,6 +38,31 @@ const MyPage = () => {
     const myToken = await tokenContract.methods.balanceOf(address).call();
 
     setMyTokenState(web3Instance.utils.fromWei(myToken, 'ether'));
+    callApprove();
+  };
+
+  const callApprove = async () => {
+    try {
+      const amount = web3Instance.utils.toWei('100', 'ether');
+      const missionContractAddress = new web3Instance.eth.Contract(
+        MissionBro.abi,
+        MissionBro.address
+      );
+      console.log(missionContractAddress);
+      const approveTx = await tokenContract.methods
+        .approve(MissionBro.address, amount)
+        .send({
+          from: address,
+          gasLimit: web3Instance.utils.toHex(500000),
+          gasPrice: web3Instance.utils.toHex(
+            web3Instance.utils.toWei('10000', 'gwei')
+          ),
+        });
+
+      console.log('approveTx 완료', approveTx.transactionHash);
+    } catch (error) {
+      console.log('approve함수 호출 에러', error);
+    }
   };
 
   return (
