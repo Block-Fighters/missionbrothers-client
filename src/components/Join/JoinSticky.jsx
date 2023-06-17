@@ -5,7 +5,7 @@ import { IoPerson } from 'react-icons/io5';
 import { IoMdShare } from 'react-icons/io';
 import { IconContext } from 'react-icons';
 
-const JoinSticky = ({ amount }) => {
+const JoinSticky = ({ amount, id }) => {
   return (
     <div>
       <$Sticky>
@@ -22,7 +22,7 @@ const JoinSticky = ({ amount }) => {
             </IconContext.Provider>
           </$InnerFirstDiv>
           <$InnerSecondDiv>{amount} BRO</$InnerSecondDiv>
-          <JoinButton />
+          <JoinButton id={id} />
         </$InnerDiv>
       </$Sticky>
     </div>

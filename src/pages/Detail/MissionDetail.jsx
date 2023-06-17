@@ -94,7 +94,7 @@ function MissionDetail() {
               {/* <MissionPlay /> */}
             </div>
           </$LeftDiv>
-          <JoinSticky amount={amount} />
+          <JoinSticky id={id} amount={amount} />
         </$TotalDiv>
       </div>
     </div>
