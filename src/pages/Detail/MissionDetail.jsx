@@ -35,7 +35,7 @@ function MissionDetail() {
         .getMissionDetails(Number(id))
         .call();
 
-      setAmount(result.participationAmount);
+      setAmount(result.participationAmount / 10 ** 18);
     } catch (error) {
       if (error.response.status === 404) {
         console.log('404 Error');

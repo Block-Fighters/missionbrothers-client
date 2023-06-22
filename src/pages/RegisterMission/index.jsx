@@ -24,8 +24,10 @@ import axios from 'axios';
 import { useAccount } from 'wagmi';
 import { missionBroContract } from '../../utils/getContract';
 import { useNavigate } from 'react-router-dom';
+import { ethers } from 'ethers';
 
 const RegisterMissionPage = () => {
+  console.log('이더스 : ', ethers);
   const { address } = useAccount();
   const [type, setType] = useState(null);
   const [title, setTitle] = useState(null);
@@ -104,22 +106,26 @@ const RegisterMissionPage = () => {
   };
 
   const registerMissionApi = async (data, token) => {
-    const contractResult = await missionBroContract.methods
-      .registerMission(
-        data.missionTitle,
-        data.fee,
-        data.recruitmentEnd,
-        data.missionStart,
-        data.missionEnd,
-        data.rule,
-        data.rewardMethod
-      )
-      .send({
-        from: address,
-        gas: 2000000,
-        value: '10000000000000000',
-      });
-    console.log(contractResult);
+    try {
+      const fee = data.fee * 10 ** 18;
+      const contractResult = await missionBroContract.methods
+        .registerMission(
+          data.missionTitle,
+          fee,
+          data.recruitmentEnd,
+          data.missionStart,
+          data.missionEnd,
+          data.rule,
+          data.rewardMethod
+        )
+        .send({
+          from: address,
+          gas: 2000000,
+        });
+      console.log(contractResult);
+    } catch (error) {
+      console.log('에러발생');
+    }
 
     const result = await axios.post(
       'http://localhost:8000/api/mission/register',
