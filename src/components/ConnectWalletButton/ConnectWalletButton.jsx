@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import { $WalletButton, $UserNickName } from './style';
+import { $Modal} from '../../Modal/Modal.jsx'
 import { useAccount, useConnect } from 'wagmi';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const ConnectWalletButton = () => {
   const navigate = useNavigate();
   const { address, isConnected } = useAccount();
-  const { connect, connectors } = useConnect();
+  const { connect, connectors} = useConnect();
   //   const { disconnect } = useDisconnect();
   // const {
   //   chains,
@@ -61,6 +62,7 @@ const ConnectWalletButton = () => {
 
   return (
     <>
+      <$Modal></$Modal>
       {isConnected ? (
         <$UserNickName onClick={onClickUser}>김요원</$UserNickName>
       ) : (
