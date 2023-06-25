@@ -32,10 +32,10 @@ function MissionDetail() {
       setMission(response.data.postData);
 
       const result = await missionBroContract.methods
-        .getMissionDetails(Number(id))
+        .getMissionDetails(id)
         .call();
-
-      setAmount(result.participationAmount / 10 ** 18);
+      const participateAmount = Number(result.participationAmount);
+      setAmount(participateAmount);
     } catch (error) {
       if (error.response.status === 404) {
         console.log('404 Error');
