@@ -67,7 +67,8 @@ const RegisterMissionPage = () => {
   };
 
   const onChangeFee = (event) => {
-    setFee(event.target.value);
+    const weiToEther = ethers.utils.parseEther(event.target.value);
+    setFee(weiToEther);
   };
 
   const onChangeRewardMethod = (value) => {
@@ -92,7 +93,7 @@ const RegisterMissionPage = () => {
       recruitmentEnd: makeTimeStamp(getToday()),
       missionStart: makeTimeStamp(missionStartDate) + 1,
       missionEnd: makeTimeStamp(missionEndDate),
-      fee: Number(fee),
+      fee: fee.toString(),
       rewardMethod,
       content: rules,
       rule: rules,
@@ -106,12 +107,12 @@ const RegisterMissionPage = () => {
   };
 
   const registerMissionApi = async (data, token) => {
+    const feeInWei = ethers.utils.formatEther(data.fee);
     try {
-      const fee = data.fee * 10 ** 18;
       const contractResult = await missionBroContract.methods
         .registerMission(
           data.missionTitle,
-          fee,
+          feeInWei,
           data.recruitmentEnd,
           data.missionStart,
           data.missionEnd,
@@ -121,10 +122,11 @@ const RegisterMissionPage = () => {
         .send({
           from: address,
           gas: 2000000,
+          value: '10000000000000000',
         });
       console.log(contractResult);
     } catch (error) {
-      console.log('에러발생');
+      console.log('에러발생', error);
     }
 
     const result = await axios.post(
