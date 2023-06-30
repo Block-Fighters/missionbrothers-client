@@ -1,11 +1,11 @@
 # Mission Brothers
 
 ### 팀원
-| 역할 | 이름 | GitHub | 역할 | 이름 | GitHub | 
+ 역할 | 이름 | GitHub | 역할 | 이름 | GitHub 
 --------|------------|------------|------------|------------|------------
 Front-end | 김재현 | <a href="https://github.com/Jaenk-99"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> | Front-end | 장은성 | <a href="https://github.com/sungeee"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>
-| Front-end | 박무호 | <a href="https://github.com/parkmuho"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> | Back-end | 박준혁 | <a href="https://github.com/berrypjh"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> 
-| Contract | 곽경록 | <a href="https://github.com/rok92"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> 
+ Front-end | 박무호 | <a href="https://github.com/parkmuho"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> | Back-end | 박준혁 | <a href="https://github.com/berrypjh"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> 
+ Contract | 곽경록 | <a href="https://github.com/rok92"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a> |Advisor|조수은|<a href="https://github.com/sueun-dev"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>
 ---------------------------------------
 
 ### 프로젝트 기간 : 2023-05-30 ~ 2023-06-13 (총 14일)
